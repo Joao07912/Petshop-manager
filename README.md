@@ -1,45 +1,83 @@
-# Petshop Manager
+# 🐾 Petshop Manager
 
-Sistema de controle de petshop com cadastro de pets e registro de serviços.
+Sistema completo de gestão de petshop com cadastro de pets e registro de serviços, desenvolvido com Angular, Python FastAPI e PostgreSQL.
 
-## Tecnologias
+## ✨ Funcionalidades
 
-- **Backend**: Python FastAPI + PostgreSQL
-- **Frontend**: Angular + TypeScript
-- **Banco**: PostgreSQL
-
-## Funcionalidades
-
-### Pets
+### 🐕 Gestão de Pets
 - ✅ Cadastrar pets (nome, espécie, tutor)
-- ✅ Listar pets com busca por nome
-- ✅ Filtrar pets por espécie
-- ✅ Excluir pets com confirmação
+- ✅ Listar pets com busca por nome em tempo real
+- ✅ Filtrar pets por espécie (Cachorro, Gato, Outro)
+- ✅ Excluir pets com confirmação de segurança
+- ✅ Interface responsiva e moderna
 
-### Serviços
-- ✅ Adicionar serviços a um pet
-- ✅ Visualizar histórico de serviços
-- ✅ Listar últimos 5 serviços por pet
+### 🛁 Gestão de Serviços
+- ✅ Adicionar serviços a um pet (banho, tosa, consulta, etc.)
+- ✅ Visualizar histórico completo de serviços
+- ✅ Modal interativo para gerenciar serviços
+- ✅ Registro automático de data/hora dos serviços
 
-## Instalação e Execução
+## 🚀 Tecnologias Utilizadas
 
-### 1. Banco de Dados PostgreSQL
+### Backend
+- **Python 3.8+** - Linguagem principal
+- **FastAPI** - Framework web moderno e rápido
+- **Pydantic** - Validação de dados
+- **psycopg2** - Driver PostgreSQL
+- **Uvicorn** - Servidor ASGI
+
+### Frontend
+- **Angular 17** - Framework frontend
+- **TypeScript** - Linguagem tipada
+- **RxJS** - Programação reativa
+- **Angular Material** - Componentes UI
+
+### Banco de Dados
+- **PostgreSQL 12+** - Banco relacional
+- **Relacionamentos** - Chaves estrangeiras
+- **Constraints** - Validação de dados
+
+## 📋 Pré-requisitos
+
+- **Node.js** 18+ e npm
+- **Python** 3.8+ e pip
+- **PostgreSQL** 12+
+- **Angular CLI** (`npm install -g @angular/cli`)
+
+## 🔧 Instalação e Execução
+
+### 1. Clone o repositório
+```bash
+git clone https://github.com/Joao07912/petshop-manager.git
+cd petshop-manager
+```
+
+### 2. Configurar Banco de Dados PostgreSQL
 
 ```bash
 # Instalar PostgreSQL (se não tiver)
+# Windows: Baixar do site oficial
+# Linux: sudo apt install postgresql postgresql-contrib
+# Mac: brew install postgresql
+
 # Criar banco e tabelas
-psql -U postgres -f db/init.sql
+psql -U postgres -c "CREATE DATABASE petshop;"
+psql -U postgres -d petshop -f db/init.sql
 ```
 
-### 2. Backend (FastAPI)
+### 3. Backend (FastAPI)
 
 ```bash
 cd backend-python
 
-# Criar ambiente virtual
+# Criar ambiente virtual (recomendado)
 python -m venv venv
-venv\Scripts\activate  # Windows
-# source venv/bin/activate  # Linux/Mac
+
+# Ativar ambiente virtual
+# Windows:
+venv\Scripts\activate
+# Linux/Mac:
+# source venv/bin/activate
 
 # Instalar dependências
 pip install -r requirements.txt
@@ -52,9 +90,9 @@ copy .env.example .env
 python main.py
 ```
 
-O backend será executado em: http://localhost:8000
+**✅ Backend rodando em:** http://localhost:8001
 
-### 3. Frontend (Angular)
+### 4. Frontend (Angular)
 
 ```bash
 cd frontend-angular
@@ -63,50 +101,78 @@ cd frontend-angular
 npm install
 
 # Executar aplicação
-npm start
+ng serve
 ```
 
-O frontend será executado em: http://localhost:4200
+**✅ Frontend rodando em:** http://localhost:4200
 
-## Estrutura do Projeto
+## 📁 Estrutura do Projeto
 
 ```
-problema2_petshop/
+petshop-manager/
 ├── db/
 │   └── init.sql                 # Script de criação das tabelas
 ├── backend-python/
-│   ├── main.py                  # API FastAPI
+│   ├── main.py                  # API FastAPI principal
 │   ├── requirements.txt         # Dependências Python
 │   └── .env.example            # Exemplo de variáveis de ambiente
 ├── frontend-angular/
 │   ├── src/app/
-│   │   ├── components/         # Componentes Angular
-│   │   ├── services/          # Serviços para API
-│   │   ├── models/            # Modelos TypeScript
-│   │   ├── app.component.*    # Componente principal
-│   │   └── app.module.ts      # Módulo principal
-│   ├── package.json           # Dependências Node.js
-│   └── angular.json           # Configuração Angular
-└── README.md
+│   │   ├── app.component.*     # Componente principal
+│   │   ├── app.module.ts       # Módulo principal Angular
+│   │   ├── models/
+│   │   │   └── pet.model.ts    # Interfaces TypeScript
+│   │   └── services/
+│   │       └── pet.service.ts  # Serviço HTTP
+│   ├── package.json            # Dependências Node.js
+│   └── angular.json            # Configuração Angular
+├── .gitignore                  # Arquivos ignorados pelo Git
+└── README.md                   # Documentação
 ```
 
-## API Endpoints
+## 🔌 API Endpoints
 
-### Pets
-- `GET /pets?busca=&especie=` - Listar pets com filtros
-- `POST /pets` - Criar novo pet
-- `DELETE /pets/{id}` - Excluir pet
+### 🐕 Pets
+| Método | Endpoint | Descrição | Parâmetros |
+|--------|----------|-----------|------------|
+| `GET` | `/pets` | Listar pets com filtros | `?busca=nome&especie=Cachorro` |
+| `POST` | `/pets` | Criar novo pet | `{ nome, especie, tutor }` |
+| `DELETE` | `/pets/{id}` | Excluir pet | `id` do pet |
 
-### Serviços
-- `POST /pets/{id}/servicos` - Adicionar serviço a um pet
-- `GET /pets/{id}/servicos?limite=5` - Listar serviços de um pet
+### 🛁 Serviços
+| Método | Endpoint | Descrição | Parâmetros |
+|--------|----------|-----------|------------|
+| `POST` | `/pets/{id}/servicos` | Adicionar serviço | `{ descricao }` |
+| `GET` | `/pets/{id}/servicos` | Listar serviços | `?limite=5` |
 
-### Outros
-- `GET /health` - Health check da API
+### 🔍 Outros
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/health` | Health check da API |
 
-## Banco de Dados
+### Exemplos de Requisições
 
-### Tabela pets
+**Criar Pet:**
+```json
+POST /pets
+{
+  "nome": "Rex",
+  "especie": "Cachorro",
+  "tutor": "João Silva"
+}
+```
+
+**Adicionar Serviço:**
+```json
+POST /pets/1/servicos
+{
+  "descricao": "Banho e tosa completa"
+}
+```
+
+## 🗄️ Banco de Dados
+
+### Tabela `pets`
 ```sql
 CREATE TABLE pets (
     id SERIAL PRIMARY KEY,
@@ -117,7 +183,7 @@ CREATE TABLE pets (
 );
 ```
 
-### Tabela servicos
+### Tabela `servicos`
 ```sql
 CREATE TABLE servicos (
     id SERIAL PRIMARY KEY,
@@ -127,29 +193,95 @@ CREATE TABLE servicos (
 );
 ```
 
-## Demonstração
+### Relacionamentos
+- Um pet pode ter **vários serviços** (1:N)
+- Exclusão em cascata: ao excluir pet, remove todos os serviços
 
-### Tela Principal
-- Lista de pets cadastrados
-- Filtros por nome e espécie
-- Botões de ação (Histórico, Excluir)
+## 🎨 Interface do Usuário
 
-### Cadastro de Pet
-- Formulário com validação
-- Campos: nome, espécie, tutor
+### 📱 Tela Principal
+- **Lista responsiva** de pets cadastrados
+- **Filtros dinâmicos** por nome e espécie
+- **Contadores** de pets por categoria
+- **Botões de ação** (Histórico, Excluir)
 
-### Histórico de Serviços
-- Modal com últimos serviços
-- Formulário para adicionar novo serviço
-- Exibição com data/hora
+### ➕ Cadastro de Pet
+- **Formulário validado** com campos obrigatórios
+- **Seleção de espécie** com dropdown
+- **Feedback visual** de sucesso/erro
 
-## Configuração do Banco
+### 📋 Histórico de Serviços
+- **Modal elegante** com histórico completo
+- **Formulário inline** para novos serviços
+- **Ordenação cronológica** (mais recentes primeiro)
+- **Formatação de datas** em português brasileiro
 
-**Credenciais padrão:**
-- Host: localhost
-- Port: 5432
-- Database: petshop
-- User: postgres
-- Password: user
+## ⚙️ Configuração do Banco
 
-Altere no arquivo `.env` conforme sua configuração.
+**Arquivo `.env` (backend-python/):**
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=petshop
+DB_USER=postgres
+DB_PASSWORD=user
+```
+
+**Credenciais padrão do projeto:**
+- Host: `localhost`
+- Port: `5432`
+- Database: `petshop`
+- User: `postgres`
+- Password: `user`
+
+## 🚀 Deploy em Produção
+
+### Backend
+1. Configure variáveis de ambiente de produção
+2. Use Gunicorn ou similar para servir a aplicação
+3. Configure proxy reverso (Nginx)
+4. Ative HTTPS
+
+### Frontend
+1. Build de produção: `ng build --prod`
+2. Servir arquivos estáticos
+3. Configure roteamento SPA
+4. Otimize assets e cache
+
+### Banco de Dados
+1. Configure backup automático
+2. Otimize índices para consultas frequentes
+3. Configure monitoramento
+4. Implemente políticas de retenção
+
+## 🔒 Segurança
+
+- **Validação de entrada** com Pydantic
+- **Sanitização SQL** com parâmetros preparados
+- **CORS configurado** para domínios específicos
+- **Validação de tipos** com TypeScript
+- **Constraints de banco** para integridade
+
+## 📱 Compatibilidade
+
+### Frontend
+- ✅ Chrome 90+
+- ✅ Firefox 88+
+- ✅ Safari 14+
+- ✅ Edge 90+
+- ✅ Dispositivos móveis
+
+### Backend
+- ✅ Python 3.8+
+- ✅ PostgreSQL 12+
+- ✅ Sistemas Unix/Linux
+- ✅ Windows 10+
+
+## 🎯 Próximas Funcionalidades
+
+- [ ] Autenticação de usuários
+- [ ] Relatórios de faturamento
+- [ ] Agendamento de serviços
+- [ ] Notificações por email/SMS
+- [ ] Dashboard com métricas
+- [ ] Backup automático de dados
