@@ -1,23 +1,23 @@
-# 🐾 Petshop Manager
+# Petshop Manager
 
 Sistema completo de gestão de petshop com cadastro de pets e registro de serviços, desenvolvido com Angular, Python FastAPI e PostgreSQL.
 
-## ✨ Funcionalidades
+## Funcionalidades
 
-### 🐕 Gestão de Pets
-- ✅ Cadastrar pets (nome, espécie, tutor)
-- ✅ Listar pets com busca por nome em tempo real
-- ✅ Filtrar pets por espécie (Cachorro, Gato, Outro)
-- ✅ Excluir pets com confirmação de segurança
-- ✅ Interface responsiva e moderna
+### Gestão de Pets
+- Cadastrar pets (nome, espécie, tutor)
+- Listar pets com busca por nome em tempo real
+- Filtrar pets por espécie (Cachorro, Gato, Outro)
+- Excluir pets com confirmação de segurança
+- Interface responsiva e moderna
 
-### 🛁 Gestão de Serviços
-- ✅ Adicionar serviços a um pet (banho, tosa, consulta, etc.)
-- ✅ Visualizar histórico completo de serviços
-- ✅ Modal interativo para gerenciar serviços
-- ✅ Registro automático de data/hora dos serviços
+### Gestão de Serviços
+- Adicionar serviços a um pet (banho, tosa, consulta, etc.)
+- Visualizar histórico completo de serviços
+- Modal interativo para gerenciar serviços
+- Registro automático de data/hora dos serviços
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Backend
 - **Python 3.8+** - Linguagem principal
@@ -37,14 +37,14 @@ Sistema completo de gestão de petshop com cadastro de pets e registro de servi�
 - **Relacionamentos** - Chaves estrangeiras
 - **Constraints** - Validação de dados
 
-## 📋 Pré-requisitos
+## Pré-requisitos
 
 - **Node.js** 18+ e npm
 - **Python** 3.8+ e pip
 - **PostgreSQL** 12+
 - **Angular CLI** (`npm install -g @angular/cli`)
 
-## 🔧 Instalação e Execução
+## Instalação e Execução
 
 ### 1. Clone o repositório
 ```bash
@@ -90,7 +90,7 @@ copy .env.example .env
 python main.py
 ```
 
-**✅ Backend rodando em:** http://localhost:8001
+**Backend rodando em:** http://localhost:8001
 
 ### 4. Frontend (Angular)
 
@@ -104,9 +104,9 @@ npm install
 ng serve
 ```
 
-**✅ Frontend rodando em:** http://localhost:4200
+**Frontend rodando em:** http://localhost:4200
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 petshop-manager/
@@ -130,22 +130,22 @@ petshop-manager/
 └── README.md                   # Documentação
 ```
 
-## 🔌 API Endpoints
+## API Endpoints
 
-### 🐕 Pets
+### Pets
 | Método | Endpoint | Descrição | Parâmetros |
 |--------|----------|-----------|------------|
 | `GET` | `/pets` | Listar pets com filtros | `?busca=nome&especie=Cachorro` |
 | `POST` | `/pets` | Criar novo pet | `{ nome, especie, tutor }` |
 | `DELETE` | `/pets/{id}` | Excluir pet | `id` do pet |
 
-### 🛁 Serviços
+### Serviços
 | Método | Endpoint | Descrição | Parâmetros |
 |--------|----------|-----------|------------|
 | `POST` | `/pets/{id}/servicos` | Adicionar serviço | `{ descricao }` |
 | `GET` | `/pets/{id}/servicos` | Listar serviços | `?limite=5` |
 
-### 🔍 Outros
+### Outros
 | Método | Endpoint | Descrição |
 |--------|----------|-----------|
 | `GET` | `/health` | Health check da API |
@@ -170,7 +170,7 @@ POST /pets/1/servicos
 }
 ```
 
-## 🗄️ Banco de Dados
+## Banco de Dados
 
 ### Tabela `pets`
 ```sql
@@ -197,26 +197,26 @@ CREATE TABLE servicos (
 - Um pet pode ter **vários serviços** (1:N)
 - Exclusão em cascata: ao excluir pet, remove todos os serviços
 
-## 🎨 Interface do Usuário
+## Interface do Usuário
 
-### 📱 Tela Principal
+### Tela Principal
 - **Lista responsiva** de pets cadastrados
 - **Filtros dinâmicos** por nome e espécie
 - **Contadores** de pets por categoria
 - **Botões de ação** (Histórico, Excluir)
 
-### ➕ Cadastro de Pet
+### Cadastro de Pet
 - **Formulário validado** com campos obrigatórios
 - **Seleção de espécie** com dropdown
 - **Feedback visual** de sucesso/erro
 
-### 📋 Histórico de Serviços
+### Histórico de Serviços
 - **Modal elegante** com histórico completo
 - **Formulário inline** para novos serviços
 - **Ordenação cronológica** (mais recentes primeiro)
 - **Formatação de datas** em português brasileiro
 
-## ⚙️ Configuração do Banco
+## Configuração do Banco
 
 **Arquivo `.env` (backend-python/):**
 ```env
@@ -234,7 +234,7 @@ DB_PASSWORD=user
 - User: `postgres`
 - Password: `user`
 
-## 🚀 Deploy em Produção
+## Deploy em Produção
 
 ### Backend
 1. Configure variáveis de ambiente de produção
@@ -254,7 +254,7 @@ DB_PASSWORD=user
 3. Configure monitoramento
 4. Implemente políticas de retenção
 
-## 🔒 Segurança
+## Segurança
 
 - **Validação de entrada** com Pydantic
 - **Sanitização SQL** com parâmetros preparados
@@ -262,22 +262,22 @@ DB_PASSWORD=user
 - **Validação de tipos** com TypeScript
 - **Constraints de banco** para integridade
 
-## 📱 Compatibilidade
+## Compatibilidade
 
 ### Frontend
-- ✅ Chrome 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Edge 90+
-- ✅ Dispositivos móveis
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
+- Dispositivos móveis
 
 ### Backend
-- ✅ Python 3.8+
-- ✅ PostgreSQL 12+
-- ✅ Sistemas Unix/Linux
-- ✅ Windows 10+
+- Python 3.8+
+- PostgreSQL 12+
+- Sistemas Unix/Linux
+- Windows 10+
 
-## 🎯 Próximas Funcionalidades
+## Próximas Funcionalidades
 
 - [ ] Autenticação de usuários
 - [ ] Relatórios de faturamento
