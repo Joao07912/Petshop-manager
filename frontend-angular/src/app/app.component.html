@@ -1,0 +1,144 @@
+<div class="container">
+  <header>
+    <h1>🐾 Petshop Manager</h1>
+  </header>
+
+  <main>
+    <!-- Filtros e busca -->
+    <section class="filtros">
+      <div class="filtro-grupo">
+        <input 
+          type="text" 
+          [(ngModel)]="busca" 
+          (input)="filtrarPets()"
+          placeholder="Buscar por nome..."
+          class="input-busca">
+        
+        <select [(ngModel)]="especieFiltro" (change)="filtrarPets()" class="select-especie">
+          <option value="">Todas as espécies</option>
+          <option value="Cachorro">Cachorro</option>
+          <option value="Gato">Gato</option>
+          <option value="Outro">Outro</option>
+        </select>
+      </div>
+      
+      <button (click)="mostrarFormulario = !mostrarFormulario" class="btn btn-primary">
+        {{ mostrarFormulario ? 'Cancelar' : 'Novo Pet' }}
+      </button>
+    </section>
+
+    <!-- Formulário de cadastro -->
+    <section *ngIf="mostrarFormulario" class="formulario-cadastro">
+      <h2>Cadastrar Novo Pet</h2>
+      <form (ngSubmit)="cadastrarPet()" class="form">
+        <div class="form-group">
+          <label>Nome:</label>
+          <input type="text" [(ngModel)]="novoPet.nome" name="nome" required class="input">
+        </div>
+        
+        <div class="form-group">
+          <label>Espécie:</label>
+          <select [(ngModel)]="novoPet.especie" name="especie" required class="input">
+            <option value="Cachorro">Cachorro</option>
+            <option value="Gato">Gato</option>
+            <option value="Outro">Outro</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Tutor:</label>
+          <input type="text" [(ngModel)]="novoPet.tutor" name="tutor" required class="input">
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-success">Cadastrar</button>
+          <button type="button" (click)="mostrarFormulario = false" class="btn btn-secondary">Cancelar</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Tabela de pets -->
+    <section class="tabela-pets">
+      <h2>Pets Cadastrados ({{ pets.length }})</h2>
+      
+      <div class="tabela-container">
+        <table class="tabela">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Espécie</th>
+              <th>Tutor</th>
+              <th>Cadastrado em</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pet of pets">
+              <td>{{ pet.nome }}</td>
+              <td>
+                <span class="badge" [class]="'badge-' + pet.especie.toLowerCase()">
+                  {{ pet.especie }}
+                </span>
+              </td>
+              <td>{{ pet.tutor }}</td>
+              <td>{{ formatarData(pet.criado_em) }}</td>
+              <td class="acoes">
+                <button (click)="abrirHistorico(pet)" class="btn btn-info btn-sm">Histórico</button>
+                <button (click)="excluirPet(pet)" class="btn btn-danger btn-sm">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div *ngIf="pets.length === 0" class="sem-dados">
+          Nenhum pet encontrado
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal de serviços -->
+  <div *ngIf="mostrarModalServicos" class="modal-overlay" (click)="fecharModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Histórico de Serviços - {{ petSelecionado?.nome }}</h3>
+        <button (click)="fecharModal()" class="btn-fechar">×</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="servico-actions">
+          <button (click)="mostrarFormularioServico = !mostrarFormularioServico" class="btn btn-primary btn-sm">
+            {{ mostrarFormularioServico ? 'Cancelar' : 'Adicionar Serviço' }}
+          </button>
+        </div>
+
+        <!-- Formulário de novo serviço -->
+        <div *ngIf="mostrarFormularioServico" class="form-servico">
+          <form (ngSubmit)="adicionarServico()" class="form">
+            <div class="form-group">
+              <label>Descrição do Serviço:</label>
+              <input type="text" [(ngModel)]="novoServico.descricao" name="descricao" 
+                     placeholder="Ex: Banho e tosa" required class="input">
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-success btn-sm">Adicionar</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Lista de serviços -->
+        <div class="servicos-lista">
+          <h4>Últimos Serviços</h4>
+          <div *ngIf="servicos.length === 0" class="sem-dados">
+            Nenhum serviço registrado
+          </div>
+          
+          <div *ngFor="let servico of servicos" class="servico-item">
+            <div class="servico-descricao">{{ servico.descricao }}</div>
+            <div class="servico-data">{{ formatarData(servico.data) }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
